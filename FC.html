@@ -1,0 +1,188 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	
+	<style>
+		#form-data .row .col-1 {
+			width: 100px;
+			max-width: 100px;
+			flex: none;
+		}
+		form .col-form-label {
+			//width: 80px;
+		}
+		form input.form-control {
+			width: 80px;
+		}
+	</style
+</head>
+<body class="bg-light">
+
+<main role="main" class="container">
+
+	<form class="mx-auto" style="width: 550px" id="form-data">
+
+	<div class="row form-group">
+		<label class="col-form-label col-1">FC Min</label>
+		<input type="text" id="fcmin" value="55" class="form-control"/>
+		<label class="col-form-label col-1">FC Max</label>
+		<input type="text" id="fcmax" value="193" class="form-control"/>
+		<label class="col-form-label col-1">FC Ref</label>
+		<input type="text" id="fcref" value="153" class="form-control"/>
+	</div>
+	<div class="row form-group">
+		<label class="col-form-label col-1" style="">Rango FC</label>
+		<input type="text" id="fcrange" readonly="true" disabled="true" class="form-control"/>
+		<label class="col-form-label col-1">% Rango</label>
+		<input type="text" id="precentagefcrange" readonly="true" disabled="true" class="form-control"/>
+		<label class="col-form-label col-1">% FC Max</label>
+		<input type="text" id="percentagefcmax" readonly="true" disabled="true" class="form-control"/>
+	</div>
+	<div class="row form-group">
+		<input type="submit" value="Calcular" onclick="calcularClick();return false;" class="form-control mx-auto btn btn-primary col-3"/>
+	</div>
+
+	</form>
+	
+	<table id="table" class="table table-bordered">
+		<thead>
+			<tr><th scope="col">Tipo</th><th scope="col">60%</th><th scope="col">70%</th><th scope="col">80%</th><th scope="col">85%</th><th scope="col">90% (VO2Max)</th><th scope="col">95%</th><th scope="col">98%</th></tr>
+		</thead>
+		<tbody>
+			<tr><th scope="row">Max</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><th scope="row">Rango</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		</tbody>
+	</table>
+	
+	<p>
+	Para una carrera de 5 kilómetros, podremos llevar a nuestro corazón a un 95-98% de su capacidad máxima.
+	En las carreras de 10 kilómetros el porcentaje deberá estar entre un 90 a 95%.
+	La medio maratón puede ser corrida a un 85 a 90% de nuestra frecuencia cardiaca máxima.
+	Para la maratón lo más adecuado es mantenerse entre un 80 a 85% de la máxima capacidad de nuestro corazón.
+	</p>
+	
+	<p>
+	Si quieres hacer trote de recuperación has de ir al 50-60% de tu FCM. 
+	Si quieres preparar carreras de fondo los rodajes han de ser al 60-70%. 
+	Si estás preparando carreras cortas y rápidas, con progresiones de 20/30´alcanza el 70-80%. 
+	Si quieres entrenar series de 200/400/1000 etc.. entonces es normal que trabajes algún día a la semana al 80-90%. 
+	Trabajar a más del 90% solo deberías hacerlo en competición. 
+	Y desde luego pasar del 95% solo está recomendado para los "élite"
+	</p>
+
+	<table border="1" class="table table-sm table-bordered mx-auto">
+		<thead class="thead-black">
+			<tr>
+				<th scope="col"><span>Distancia de la competición</span></th>
+				<th scope="col"><span> Porcentaje de tu FC máxima</span></th>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row"><span>5 km</span></th>
+				<td><span>95 a 98%</span></td>
+			</tr>
+			<tr>
+				<th scope="row"><span>10 km</span></th>
+				<td><span>90 a 95%</span></td>
+			</tr>
+			<tr>
+				<th scope="row"><span>Medio maratón</span></th>
+				<td><span>85 a 90%</span></td>
+			</tr>
+			<tr>
+				<th scope="row"><span>Maratón</span></th>
+				<td><span>80 a 85%</span></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul>
+	<li><a class="auto-href">http://altorendimiento.com/zonas-de-entrenamiento-segun-las-pulsaciones-cardiacas/</a></li>
+	<li><a class="auto-href">https://running.es/consejos/ze-y-fc-aprende-regular-tu-entrenamiento#.XFCP8FxKhpk</a></li>
+	<li><a class="auto-href">http://www.corredorespopulares.es/media_pulsometro.php</a></li>
+	<li><a class="auto-href">http://www.corredorespopulares.es/frecuencia.php</a></li>
+	<li><a class="auto-href">https://www.123acorrer.es/Running/calculadora-running</a></li>
+	<li><a class="auto-href">https://www.mcmillanrunning.com/</a></li>
+	<li><a class="auto-href">http://www.zurichmaratonsevilla.es/zm2-sub-3horas-30min</a></li>
+	<li><a class="auto-href">https://www.runners.es/entrenamiento/articulo/secreto-esta-pista</a></li>
+	<li><a class="auto-href">https://www.runners.es/entrenamiento/series/articulo/como-entrenar-series-cortas</a></li>
+	<li><a class="auto-href">http://end.runners.es/entrenamiento/articulo/como-conocer-tu-marca-en-cualquier-distancia</a></li>
+	<li><a class="auto-href">https://www.runners.es/entrenamiento/articulo/calcula-tu-tiempo-maraton</a></li>
+	<li><a class="auto-href">https://www.foroatletismo.com/entrenamiento/empieza-con-las-cuestas-2/</a></li>
+	<li><a class="auto-href">https://escueladerunning.com/entrenamiento-cuestas/</a></li>
+	<li><a class="auto-href">https://mindfit.club/running/entrenamiento-cuestas/</a></li>
+	<li><a class="auto-href">https://www.foroatletismo.com/foro/entrenamiento/25855-ritmos-de-entreno.html</a></li>
+	<li><a class="auto-href">https://running.es/planes-de-entrenamientos/polarizar-o-no-polarizar</a></li>
+	<li><a class="auto-href">https://www.sport.es/labolsadelcorredor/dieta-del-maratoniano/</a></li>
+	<li><a class="auto-href">https://running.es/alimentacion/8-consejos-nutricionales-para-runners</a></li>
+	<li><a class="auto-href">https://www.runtastic.com/blog/es/guia-de-nutricion-para-runners/</a></li>
+	<li><a class="auto-href">https://runners.es/rcs/comun/ficheros/371/tabla_254_1.htm</a></li>
+	<ul>
+
+</main>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+	<script>
+		convertLinks();
+	
+		function convertLinks() {
+			var links2Convert = $("a.auto-href");
+			for (var i=0; i<links2Convert.length; i++) {
+				links2Convert[i].href = links2Convert[i].text;
+			}
+		}
+	
+		function calcularClick() {
+			var fcmin = getAndValidate("fcmin");
+			var fcmax = getAndValidate("fcmax");
+			var fcref = getAndValidate("fcref");
+			
+			if ((fcmin != "") && (fcmax != "") && (fcref != "")) {
+				var fcrange = fcmax - fcmin;
+				var fcrefMinusfcmin = fcref - fcmin;
+				var precentagefcrange = ((fcrefMinusfcmin * 100) / fcrange).toFixed(2);
+				var percentagefcmax = ((fcref * 100) / fcmax).toFixed(2);
+				results(fcrange, precentagefcrange, percentagefcmax);
+				tabla(fcmax, fcrange, fcmin)
+			} else {
+				results("", "", "");
+				tabla("", "");
+			}
+			
+		}
+
+		function tabla(fcmax, fcrange, fcmin) {
+			var porcentages = [60, 70, 80, 85, 90, 95, 98];
+			var rows = [fcmax, fcrange];
+			var table = document.getElementById("table")
+			for (j=0; j<porcentages.length; j++) {
+					table.rows[1].cells[j+1].innerHTML = ((porcentages[j] * rows[0]) / 100).toFixed(2);
+					table.rows[2].cells[j+1].innerHTML = (((porcentages[j] * rows[1]) / 100) + parseInt(fcmin)).toFixed(2);
+			}
+		}
+		
+		function results(fcrange, precentagefcrange, percentagefcmax) {
+			var inputText = document.getElementById("fcrange").value = fcrange;
+			var inputText = document.getElementById("precentagefcrange").value = precentagefcrange;
+			var inputText = document.getElementById("percentagefcmax").value = percentagefcmax;
+		}
+		
+		function getAndValidate(textId){
+			var inputText = document.getElementById(textId)
+			var textValue = inputText.value;
+			var isValid = /^[0-9]+$/.test(textValue);
+			var result = "";
+			if (isValid) {
+				inputText.style.backgroundColor= "white";
+				result = textValue;
+			} else {
+				inputText.style.backgroundColor = "red";
+			}
+			return result;
+		}
+	</script>
+</body>
+</html>
