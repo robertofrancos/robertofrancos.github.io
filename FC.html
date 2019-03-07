@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+	<title>Cosas de Running</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	
 	<style>
@@ -9,9 +10,11 @@
 			max-width: 100px;
 			flex: none;
 		}
+		/*
 		form .col-form-label {
-			//width: 80px;
+			width: 80px;
 		}
+		*/
 		form input.form-control {
 			width: 80px;
 		}
@@ -33,11 +36,11 @@
 	</div>
 	<div class="row form-group">
 		<label class="col-form-label col-1" style="">Rango FC</label>
-		<input type="text" id="fcrange" readonly="true" disabled="true" class="form-control"/>
+		<input type="text" id="fcrange" readonly="readonly" disabled="true" class="form-control"/>
 		<label class="col-form-label col-1">% Rango</label>
-		<input type="text" id="precentagefcrange" readonly="true" disabled="true" class="form-control"/>
+		<input type="text" id="precentagefcrange" readonly="readonly" disabled="true" class="form-control"/>
 		<label class="col-form-label col-1">% FC Max</label>
-		<input type="text" id="percentagefcmax" readonly="true" disabled="true" class="form-control"/>
+		<input type="text" id="percentagefcmax" readonly="readonly" disabled="true" class="form-control"/>
 	</div>
 	<div class="row form-group">
 		<input type="submit" value="Calcular" onclick="calcularClick();return false;" class="form-control mx-auto btn btn-primary col-3"/>
@@ -71,7 +74,7 @@
 	Y desde luego pasar del 95% solo está recomendado para los "élite"
 	</p>
 
-	<table border="1" class="table table-sm table-bordered mx-auto">
+	<table class="table table-sm table-bordered mx-auto">
 		<thead class="thead-black">
 			<tr>
 				<th scope="col"><span>Distancia de la competición</span></th>
