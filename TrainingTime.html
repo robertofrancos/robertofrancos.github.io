@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Cosas de Running</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	
+	<style>
+		#form-data .row .col-1 {
+			width: 100px;
+			max-width: 100px;
+			flex: none;
+		}
+		/*
+		form .col-form-label {
+			width: 80px;
+		}
+		*/
+		form input.form-control {
+			width: 80px;
+		}
+	</style>
+</head>
+<body class="bg-light">
+
+<main class="container">
+
+	<form class="mx-auto" style="width: 550px" id="form-data">
+
+	<div class="row form-group">
+		<label class="col-form-label col-1">Repeticiones</label>
+		<input type="text" id="reps" value="3" class="form-control"/>
+		<label class="col-form-label col-1">Tiempo Repeticion</label>
+		<input type="text" id="repsTime" value="180" class="form-control"/>
+		<label class="col-form-label col-1">Descanso Repeticiones (seg)</label>
+		<input type="text" id="timeBetweenReps" value="90" class="form-control"/>
+	</div>
+	<div class="row form-group">
+		<label class="col-form-label col-1">Series</label>
+		<input type="text" id="series" value="3" class="form-control"/>
+		<label class="col-form-label col-1">Descanso series (seg)</label>
+		<input type="text" id="timeBetweenSeries" value="300" class="form-control"/>
+	</div>
+	<div class="row form-group">
+		<label class="col-form-label col-1" style="">Tiempo serie</label>
+		<input type="text" id="serieTime" readonly="readonly" disabled="disabled" class="form-control"/>
+		<label class="col-form-label col-1">Tiempo total</label>
+		<input type="text" id="totalTime" readonly="readonly" disabled="disabled" class="form-control"/>
+	</div>	<div class="row form-group">
+		<input type="submit" value="Calcular" onclick="calcularClick();return false;" class="form-control mx-auto btn btn-primary col-3"/>
+	</div>
+
+	</form>
+
+</main>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+	<script>
+	
+		function calcularClick() {
+			var repsAsTxt = getAndValidate("reps");
+			var repsTimeAsTxt = getAndValidate("repsTime");
+			var timeBetweenRepsAsTxt = getAndValidate("timeBetweenReps");
+			var seriesAsTxt = getAndValidate("series");
+			var timeBetweenSeriesAsTxt = getAndValidate("timeBetweenSeries");
+			
+			if ((repsAsTxt != "") && (repsTimeAsTxt != "") && (timeBetweenRepsAsTxt != "") && (seriesAsTxt != "") && (timeBetweenSeriesAsTxt != "")) {
+
+				var reps = parseInt(repsAsTxt);
+				var repsTime = parseInt(repsTimeAsTxt);
+				var timeBetweenReps = parseInt(timeBetweenRepsAsTxt);
+				var series = parseInt(seriesAsTxt);
+				var timeBetweenSeries = parseInt(timeBetweenSeriesAsTxt);
+
+				var serieTime = ((reps - 1) * (repsTime + timeBetweenReps)) + repsTime;
+				var totalTime = (series - 1) * (serieTime + timeBetweenSeries) + serieTime;
+				
+				document.getElementById("serieTime").value = (secondsToHourToPrint(serieTime));
+				document.getElementById("totalTime").value = (secondsToHourToPrint(totalTime));
+				
+			} else {
+				//alert('Error');
+			}
+			
+		}
+
+		function getAndValidate(textId){
+			var inputText = document.getElementById(textId)
+			var textValue = inputText.value;
+			var isValid = /^[0-9]+$/.test(textValue);
+			var result = "";
+			if (isValid) {
+				inputText.style.backgroundColor= "white";
+				result = textValue;
+			} else {
+				inputText.style.backgroundColor = "red";
+			}
+			return result;
+		}
+		
+		function secondsToHourToPrint(time) {
+			var minutes = Math.floor(time / 60);
+			var seconds = time - minutes * 60;
+			return str_pad_left(minutes, '0', 2) + ':' + str_pad_left(seconds, '0', 2);
+		}
+
+		function str_pad_left(string, pad,length) {
+			return (new Array(length + 1).join(pad) + string).slice(-length);
+		}
+
+	</script>
+</body>
+</html>
