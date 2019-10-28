@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Cálculo de tiempo de entrenamiento</title>
+	<title>C&aacutelculo de tiempo de entrenamiento</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	
 	<style>
@@ -41,15 +41,59 @@
 		<input type="text" id="timeBetweenSeries" value="300" class="form-control"/>
 	</div>
 	<div class="row form-group">
+		<label class="col-form-label col-1">N Repeticiones</label>
+		<input type="text" id="totalReps" readonly="readonly" disabled="disabled" class="form-control"/>
 		<label class="col-form-label col-1" style="">Tiempo serie</label>
 		<input type="text" id="serieTime" readonly="readonly" disabled="disabled" class="form-control"/>
 		<label class="col-form-label col-1">Tiempo total</label>
 		<input type="text" id="totalTime" readonly="readonly" disabled="disabled" class="form-control"/>
+		<label class="col-form-label col-1">Tiempo activo</label>
+		<input type="text" id="activeTime" readonly="readonly" disabled="disabled" class="form-control"/>
+		<label class="col-form-label col-1">Time active (%)</label>
+		<input type="text" id="percentajeTimeActive" readonly="readonly" disabled="disabled" class="form-control"/>
 	</div>	<div class="row form-group">
 		<input type="submit" value="Calcular" onclick="calcularClick();return false;" class="form-control mx-auto btn btn-primary col-3"/>
 	</div>
 
 	</form>
+
+	<h1>Fuerza-Resistencia (48 horas)</h1>
+	<ul>
+		<li>900m (1,4%) paseo menhires (4,6km 15 min)
+		<li>650m (3,4%) cocheras, glorieta portiño
+		<li>450m (8%) visma-bens (3km 15)
+		<li>800m (4%) grela (fut indoor a ventorrillo)
+		<li>hasta 2km entre feans y uxes (4%) (5,5 km 20 min)
+	</ul>
+	<ul>
+		<li>5%, 4-12 repeticiones repartidas en 2-3 series</li>
+		<li>De 500m-4km o 3'-12'</li>
+		<li>sentado cadencia 50-60 y FC 80%-85% FCMax (yo, 149-160)</li>
+		<li>descanso mitad de la rep y 10' entre series hasta 60%FCMax (yo, 111)</li>
+	</ul>
+
+	<h1>Fuerza-Velocidad (24h recuperacion)</h1> 
+	<ul>
+			<li>Cuesta san amaro, 190m, 8,4%</li>
+			<li>ronda de nelle</li>
+	</ul>
+	<ul>
+		<li>7%-9%, 6-10 repeticiones repartidas en 2 series</li>
+		<li>De 150m-200m</li>
+		<li>sentado o de pie cadencia > 80 (no importa FC)</li>
+		<li>descanso entre rep 3'-5', entre series 8'-10' (60%FCMax)  yo, 111)</li>
+	</ul>
+	
+	<h1>Fuerza-Explosiva (para sprinters -no se suele entrenar-)</h1>
+	<ul>
+		<li>ronda de nelle</li>
+	</ul>
+	<ul>
+		<li>10%-15%, 8-12 rep en 2-3 series</li>
+		<li>De 70m-100m</li>
+		<li>de pie cadencia entre 60-80 (no importa FC)</li>
+		<li>descanso entre rep 3'-5', entre series 6'-8' (60%FCMax) (yo, 111)</li>
+	</ul>
 
 </main>
 	
@@ -74,11 +118,17 @@
 				var series = parseInt(seriesAsTxt);
 				var timeBetweenSeries = parseInt(timeBetweenSeriesAsTxt);
 
+				var totalReps = reps * series;
+				var activeTime = series * reps * repsTime;
 				var serieTime = ((reps - 1) * (repsTime + timeBetweenReps)) + repsTime;
 				var totalTime = (series - 1) * (serieTime + timeBetweenSeries) + serieTime;
+				var percentajeTimeActive = Math.floor((activeTime * 100) / totalTime);
 				
-				document.getElementById("serieTime").value = (secondsToHourToPrint(serieTime));
-				document.getElementById("totalTime").value = (secondsToHourToPrint(totalTime));
+				document.getElementById("totalReps").value = totalReps;
+				document.getElementById("serieTime").value = secondsToHourToPrint(serieTime);
+				document.getElementById("totalTime").value = secondsToHourToPrint(totalTime);
+				document.getElementById("activeTime").value = secondsToHourToPrint(activeTime);
+				document.getElementById("percentajeTimeActive").value = percentajeTimeActive;
 				
 			} else {
 				//alert('Error');
