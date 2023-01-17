@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Power Zones</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	
+	<style>
+		#form-data .row .col-1 {
+			width: 100px;
+			max-width: 100px;
+			flex: none;
+		}
+		/*
+		form .col-form-label {
+			width: 80px;
+		}
+		*/
+		form input.form-control {
+			width: 80px;
+		}
+	</style>
+</head>
+<body class="bg-light">
+
+<main class="container">
+
+	<form class="mx-auto" style="width: 550px" id="form-data">
+
+	<div class="row form-group">
+		<label class="col-form-label col-1">FTP</label>
+		<input type="text" id="ftp" value="55" class="form-control"/>
+		<label class="col-form-label col-1">Indoor Factor</label>
+		<input type="text" id="indoor-factor" value="5" class="form-control"/>
+	</div>
+	<div class="row form-group">
+		<input type="submit" value="Calcular" onclick="calcularClick();return false;" class="form-control mx-auto btn btn-primary col-3"/>
+	</div>
+
+	</form>
+	
+	<table id="table" class="table table-bordered">
+		<thead>
+			<tr>
+        <th scope="col">Tipo</th>
+        <th scope="col">Z1</th>
+        <th scope="col">Z2</th>
+        <th scope="col">Z3</th>
+        <th scope="col">Z4</th>
+        <th scope="col">Z5</th>
+        <th scope="col">Z6</th>
+        <th scope="col">Z7</th>
+      </tr>
+		</thead>
+		<tbody>
+			<tr><th scope="row">Outdoor</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><th scope="row">Indoor</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		</tbody>
+	</table>
+
+</main>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+	<script>
+		function calcularClick() {
+			var ftp = getAndValidate("ftp");
+			var indoorFactor = getAndValidate("indoor-factor");
+			
+			if ((ftp != "") && (indoorFactor != "")) {
+				tabla(ftp, indoorFactor)
+			} else {
+				tabla("", "");
+			}
+			
+		}
+
+		function tabla(ftp, indoorFactor) {
+			var porcentages = [55, 75, 90, 105, 120, 150];
+			var table = document.getElementById("table")
+			for (j=0; j<porcentages.length; j++) {
+        var current = ((porcentages[j] * ftp) / 100);
+				table.rows[1].cells[j+1].innerHTML = current.toFixed(2);
+				table.rows[2].cells[j+1].innerHTML = ((current * 5) / 100).toFixed(2);
+			}
+		}
+		
+		function getAndValidate(textId){
+			var inputText = document.getElementById(textId)
+			var textValue = inputText.value;
+			var isValid = /^[0-9]+$/.test(textValue);
+			var result = "";
+			if (isValid) {
+				inputText.style.backgroundColor= "white";
+				result = textValue;
+			} else {
+				inputText.style.backgroundColor = "red";
+			}
+			return result;
+		}
+	</script>
+</body>
+</html>
