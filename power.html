@@ -28,7 +28,7 @@
 
 	<div class="row form-group">
 		<label class="col-form-label col-1">FTP</label>
-		<input type="text" id="ftp" value="55" class="form-control"/>
+		<input type="text" id="ftp" value="241" class="form-control"/>
 		<label class="col-form-label col-1">Indoor Factor</label>
 		<input type="text" id="indoor-factor" value="5" class="form-control"/>
 	</div>
@@ -80,9 +80,20 @@
 			var porcentages = [55, 75, 90, 105, 120, 150];
 			var table = document.getElementById("table")
 			for (j=0; j<porcentages.length; j++) {
-        var current = ((porcentages[j] * ftp) / 100);
-				table.rows[1].cells[j+1].innerHTML = current.toFixed(2);
-				table.rows[2].cells[j+1].innerHTML = ((current * 5) / 100).toFixed(2);
+				
+				if (j>0) {
+					var previousPorcentage = porcentages[j-1];
+				} else {
+					var previousPorcentage = 0;
+				}
+				var currentPorcentage = porcentages[j];
+			
+				var previous = (previousPorcentage * ftp) / 100;
+				var current = (currentPorcentage * ftp) / 100;
+				var previousFixed = (previous * (100 - indoorFactor)) / 100;
+				var currentFixed = (current * (100 - indoorFactor)) / 100;
+				table.rows[1].cells[j+1].innerHTML = Math.round(previous) + ' - '+ Math.round(current);
+				table.rows[2].cells[j+1].innerHTML = Math.round(previousFixed) + ' - '+ Math.round(currentFixed);
 			}
 		}
 		
