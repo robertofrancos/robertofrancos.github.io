@@ -92,6 +92,7 @@
 				var current = (currentPorcentage * ftp) / 100;
 				var previousFixed = (previous * (100 - indoorFactor)) / 100;
 				var currentFixed = (current * (100 - indoorFactor)) / 100;
+				table.rows[0].cells[j+1].innerHTML = 'Z' + (j+1) + ' ' + previousPorcentage + '-' + currentPorcentage;
 				table.rows[1].cells[j+1].innerHTML = Math.round(previous) + ' - '+ Math.round(current);
 				table.rows[2].cells[j+1].innerHTML = Math.round(previousFixed) + ' - '+ Math.round(currentFixed);
 			}
